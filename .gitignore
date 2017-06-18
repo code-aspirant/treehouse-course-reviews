@@ -1,3 +1,5 @@
-/.idea/
-/gradle/
-/.gradle/
+.idea
+.gradle
+!gradle-wrapper.jar
+.gradletasknamecache
+gradle-app.setting
