@@ -1,8 +1,13 @@
 package com.treehouse.zag.course;
 
 import com.treehouse.zag.core.BaseEntity;
+import com.treehouse.zag.review.Review;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created @author sobchak on 6/18/17.
@@ -12,10 +17,14 @@ public class Course extends BaseEntity {
 
     private String title;
     private String url;
+    // Cacade will delete any associated reviews if the Course is deleted
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private List<Review> reviews;
 
     // JPA requires a constructor that does not take any parameters
     protected Course() {
         super();
+        reviews = new ArrayList<>(); // We want to initialize the list
     }
 
     public Course(String title, String url) {
@@ -39,5 +48,14 @@ public class Course extends BaseEntity {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public List<Review> getReviews() {
+        return this.reviews;
+    }
+
+    public void addReview(Review review) {
+        review.setCourse(this);
+        reviews.add(review); // We'll want a constructor for reviews
     }
 }
