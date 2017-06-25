@@ -2,6 +2,7 @@ package com.treehouse.zag.review;
 
 import com.treehouse.zag.core.BaseEntity;
 import com.treehouse.zag.course.Course;
+import com.treehouse.zag.user.User;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -17,6 +18,9 @@ public class Review extends BaseEntity {
 
     @ManyToOne
     private Course course;
+
+    @ManyToOne
+    private User reviewer;
 
     // TODO - we are duplicating code here for every single entity. Share it?
     // -- we moved this into BaseEntity
@@ -53,4 +57,11 @@ public class Review extends BaseEntity {
         this.course = course;
     }
 
+    public User getReviewer() {
+        return reviewer;
+    }
+
+    public void setReviewer(User reviewer) {
+        this.reviewer = reviewer;
+    }
 }
